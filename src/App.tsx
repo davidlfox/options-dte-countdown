@@ -1,87 +1,62 @@
-import reactLogo from './assets/react.svg'
-import fleekLogo from './assets/fleekLogo.svg'
-import fleekMark from './assets/fleekMark.svg'
-import plusIcon from './assets/plus.svg'
-import viteLogo from './assets/vite.svg'
+import React, { useState } from 'react';
+import './App.css';
 
-import './App.css'
+const App: React.FC = () => {
+  const [startDate, setStartDate] = useState<Date>(() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  });
 
-function App() {
-  return (
-    <main>
-      <div className="hero-top">
-        <img src={fleekLogo} style={{ height: 87 }} />
-        <img src={plusIcon} />
-        <img src={reactLogo} style={{ height: 87 }} />
-      </div>
-      <p className='description'>
-        This is a template for creating a React site build it with Vite and deploying it on Fleek.
-      </p>
-      <ul role="list" className='card-list'>
-        <Card
-          icon={fleekMark}
-          width={31}
-          href="https://docs.fleek.xyz/"
-          title="Fleek Documentation"
-          body="Learn about Fleek & the available services by cheking our official docs."
-        />
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const [year, month, day] = event.target.value.split('-');
+    const selectedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    setStartDate(selectedDate);
+  };
 
-        <Card
-          icon={reactLogo}
-          width={31}
-          href="https://react.dev/"
-          title="React Documentation"
-          body="Learn about React in their official docs."
-        />
+  const renderBoxes = () => {
+    const boxes = [];
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        <Card
-          icon={fleekMark}
-          width={31}
-          href="https://blog.fleek.xyz/"
-          title="Fleek Blog"
-          body="Checkout our Blog for more information about Fleek."
-        />
+    for (let i = 0; i <= 7; i++) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + i);
 
-        <Card
-          icon={viteLogo}
-          width={31}
-          href="https://vitejs.dev/guide/"
-          title="Vite Documentation"
-          body="Learn about Vite & how it can bring you a modern development experience."
-        />
-      </ul>
-    </main >
-  )
-}
+      const dayOfWeek = daysOfWeek[currentDate.getDay()];
+      const dateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}`;
+      const dte = 7 - i;
 
-type CardProps = {
-  title: string;
-  body: string;
-  href: string;
-  icon: string;
-  width: number;
-}
+      const boxColor = dte <= 2 ? 'red' : 'green';
 
-function Card({ title, width, body, href, icon }: CardProps) {
-  return (
-    <li className='card'>
-      <a href={href}>
-        <div className='card-top-row'>
-          <img
-            alt='card-icon'
-            style={{ height: 31, width }}
-            src={icon}
-          />
-          <h2>
-            {title}
-          </h2>
+      boxes.push(
+        <div key={i} className={`box ${boxColor}`}>
+          <div className="box-content">
+            <div>{dayOfWeek}</div>
+            <div>{dateString}</div>
+            <div>{`${dte} DTE`}</div>
+          </div>
         </div>
-        <p>
-          {body}
-        </p>
-      </a>
-    </li>
-  )
+      );
+    }
+
+    return boxes;
+  };
+
+  return (
+    <div className="App">
+      <h1>Options Trading Strategy - 7 DTE</h1>
+      <label>
+        Start Date:
+        <input 
+          type="date" 
+          value={startDate.toISOString().split('T')[0]} 
+          onChange={handleDateChange} 
+        />
+      </label>
+      <div className="box-container">
+        {renderBoxes()}
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;

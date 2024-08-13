@@ -1,69 +1,53 @@
-main {
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  position: absolute;
-}
-
-.hero-top {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.description {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.App {
   text-align: center;
-  width: 100%;
+  font-family: Arial, sans-serif;
 }
 
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
+h1 {
+  color: #333;
 }
 
-.card {
-  list-style: none;
-}
-
-.card > a {
-  color: white;
-  box-sizing: border-box;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  border-radius: 1.5rem;
-  border: 0.85px solid #313538;
-  gap: 15px;
-  padding: 2rem 1.25rem;
-}
-
-.card-top-row {
-  gap: 15px;
-  display: flex;
-  align-items: start;
-}
-
-.card h2 {
-  font-size: 1.25rem;
-  line-height: 2rem;
-  font-weight: 700;
-  margin: 0;
-  color: white;
-}
-
-.card p {
-  text-align: start;
+label {
   font-size: 16px;
-  line-height: 1.5rem;
-  color: #9ca3af;
-  margin: 0;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input[type="date"] {
+  font-size: 16px;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.box-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.box {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.box-content {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.green {
+  background-color: #4caf50;
+}
+
+.red {
+  background-color: #f44336;
 }
