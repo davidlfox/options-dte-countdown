@@ -47,6 +47,42 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.box {
+  font-size: 16px;
+}
+
+.news-popup {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.news-popup p {
+  display: block;
+}
+
+/* Small dot in the corner */
+.box.has-news::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background-color: gold;
+  border-radius: 50%;
+}
+
+.box.has-news {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.35),
+    rgba(255, 215, 0, 0.35) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
