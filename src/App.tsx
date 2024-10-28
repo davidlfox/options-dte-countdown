@@ -27,7 +27,6 @@ const App: React.FC = () => {
       currentDate.setDate(startDate.getDate() + i);
       
       const dayOfWeek = daysOfWeek[currentDate.getDay()];
-      const dateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}`;
       const newsDateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
       // Format the date for the ForexFactory link
