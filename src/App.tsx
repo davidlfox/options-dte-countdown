@@ -20,23 +20,32 @@ const App: React.FC = () => {
   const renderBoxes = () => {
     const boxes = [];
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
     for (let i = 0; i <= 7; i++) {
       const currentDate = new Date(startDate);
       currentDate.setDate(startDate.getDate() + i);
       
       const dayOfWeek = daysOfWeek[currentDate.getDay()];
-      const dateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+      const dateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}`;
+      const newsDateString = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+      // Format the date for the ForexFactory link
+      const month = months[currentDate.getMonth()];
+      const day = currentDate.getDate();
+      const year = currentDate.getFullYear();
+      const forexLink = `https://www.forexfactory.com/calendar?day=${month}${day}.${year}`;
+
       const dte = 7 - i;
 
-      const hasNews = newsEvents.some(event => event.date === dateString);
+      const hasNews = newsEvents.some(event => event.date === newsDateString);
       const boxClass = `box ${dte <= 2 ? 'red' : 'green'} ${hasNews ? 'has-news' : ''}`;
 
       boxes.push(
-        <a href={`https://www.forexfactory.com/calendar?day=${currentDate.getMonth() + 1}${currentDate.getDate()}.${currentDate.getFullYear()}`} target="_blank" key={i}>
+        <a href={forexLink} target="_blank" key={i}>
           <div
             className={boxClass}
-            onMouseEnter={() => setHoveredDate(dateString)}
+            onMouseEnter={() => setHoveredDate(newsDateString)}
             onMouseLeave={() => setHoveredDate(null)}
           >
             <div className="box-content">
