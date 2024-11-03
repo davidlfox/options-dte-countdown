@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { fetchNewsEvents, NewsEvent } from './newsService';
+import { trackDateChange, trackHoverNewsItem, trackLinkClick } from './analytics';
 
 const App: React.FC = () => {
   const [startDate, setStartDate] = useState<Date>(() => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
     const [year, month, day] = event.target.value.split('-');
     const selectedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
     setStartDate(selectedDate);
+    trackDateChange(event.target.value);
   };
 
   const renderBoxes = () => {
@@ -41,10 +43,15 @@ const App: React.FC = () => {
       const boxClass = `box ${dte <= 2 ? 'red' : 'green'} ${hasNews ? 'has-news' : ''}`;
 
       boxes.push(
-        <a href={forexLink} target="_blank" key={i}>
+        <a href={forexLink} target="_blank" key={i} onClick={() => trackLinkClick(forexLink)}>
           <div
             className={boxClass}
-            onMouseEnter={() => setHoveredDate(newsDateString)}
+            onMouseEnter={() => {
+              setHoveredDate(newsDateString);
+              if (hasNews) {
+                trackHoverNewsItem(newsDateString); 
+              }
+            }}
             onMouseLeave={() => setHoveredDate(null)}
           >
             <div className="box-content">
