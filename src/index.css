@@ -61,18 +61,6 @@ button:focus-visible {
   display: block;
 }
 
-/* Small dot in the corner */
-.box.has-news::after {
-  content: '';
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 8px;
-  height: 8px;
-  background-color: gold;
-  border-radius: 50%;
-}
-
 .box.has-news {
   background-image: repeating-linear-gradient(
     45deg,
