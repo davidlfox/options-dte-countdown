@@ -8,7 +8,7 @@ const newsEvents: NewsEvent[] = [
   { date: '11/5/2024', title: 'Presidential Election' },
   { date: "11/1/2024", title: "Unemployment Rate" },
   { date: "12/6/2024", title: "Unemployment Rate" },
-  { date: "1/3/2025", title: "Unemployment Rate" },
+  { date: "1/10/2025", title: "Unemployment Rate" },
   { date: "2/7/2025", title: "Unemployment Rate" },
   { date: "3/7/2025", title: "Unemployment Rate" },
   { date: "4/4/2025", title: "Unemployment Rate" },
